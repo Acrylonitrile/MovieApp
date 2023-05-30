@@ -14,6 +14,8 @@ function SearchResults({ results }: Props) {
           <Card
             background={item.poster_path}
             name={item.title || item.name || ""}
+            mediatype={item.media_type}
+            id={item.id}
           />
         ))}
       </MainWrapper>

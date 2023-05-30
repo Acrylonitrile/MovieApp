@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { styled } from "styled-components";
 import Sidebar from "./Molecules/SideBar";
 import SearchPage from "./Pages/SearchPage";
+import DetailsPage from "./Pages/DetailsPage";
+import PersonPage from "./Pages/PersonPage";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/page/:mediatype/:id" element={<DetailsPage />} />
+              <Route path="/person/:personId" element={<PersonPage />} />
             </Routes>
           </PageWrap>
         </MainWrapper>

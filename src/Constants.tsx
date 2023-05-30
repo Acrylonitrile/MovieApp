@@ -5,6 +5,7 @@ import {
   faFilm,
   faTv,
 } from "@fortawesome/free-solid-svg-icons";
+import { IMovieorTv } from "./Interfaces";
 
 const baseUrl = "https://api.themoviedb.org/3/";
 const searchUrl = "https://api.themoviedb.org/3/search/multi";
@@ -26,6 +27,7 @@ const tvUrls: Urls = {
 
 const configUrl = baseUrl + "configuration";
 const imageBaseUrl = "https://image.tmdb.org/t/p/original";
+const videoBaseUrl = "https://www.youtube.com/embed/";
 
 const options = {
   method: "GET",
@@ -34,6 +36,15 @@ const options = {
     Authorization:
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNGY2YzQ2MzUwZmY3OGMzODk5ZjQ0OWRmMjg5YzdkYSIsInN1YiI6IjY0NmM4NTM3MzNhMzc2MDE1OGRiNjdiYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.O33dhYWtNJxqqAs8PbiJ9hqCVTbsOM4PYco3J8IE1M0",
   },
+};
+
+export const emptyDetails: IMovieorTv = {
+  id: 0,
+  overview: "",
+  backdrop_path: "",
+  poster_path: "",
+  genre_ids: [],
+  media_type: "movie",
 };
 
 const buttons = [
@@ -60,6 +71,7 @@ const buttons = [
 ];
 
 export {
+  baseUrl,
   tvUrls,
   options,
   configUrl,
@@ -67,4 +79,5 @@ export {
   movieUrls,
   buttons,
   searchUrl,
+  videoBaseUrl,
 };

@@ -1,16 +1,23 @@
 import { styled } from "styled-components";
 import { imageBaseUrl } from "../Constants";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   background: string;
   name: string;
+  mediatype: "movie" | "tv";
+  id: number;
 }
 
-function Card({ background, name }: Props) {
+function Card({ background, name, mediatype, id }: Props) {
   // console.log(background);
+  let navigate = useNavigate();
 
   return (
-    <CardWrap background={imageBaseUrl + background}>
+    <CardWrap
+      background={imageBaseUrl + background}
+      onClick={() => navigate(`/page/${mediatype}/${id}`)}
+    >
       {background ? "" : name}
     </CardWrap>
   );
@@ -29,4 +36,7 @@ const CardWrap = styled.div<{ background: string }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;

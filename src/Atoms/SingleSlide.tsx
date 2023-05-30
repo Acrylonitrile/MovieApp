@@ -4,19 +4,27 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { styled } from "styled-components";
 import { imageBaseUrl } from "../Constants";
 import { IMovieorTv } from "../Interfaces";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   item: IMovieorTv;
   genreList: string;
+  mediatype: string;
 }
 
-function SingleSlide({ item, genreList }: Props) {
+function SingleSlide({ item, genreList, mediatype }: Props) {
+  let navigate = useNavigate();
   return (
-    <SlideWrapper background={imageBaseUrl + item.backdrop_path}>
+    <SlideWrapper
+      background={imageBaseUrl + item.backdrop_path}
+      onClick={() => navigate(`/page/${mediatype}/${item.id}`)}
+    >
       <TextWrapper id={item.id.toString()}>
         <Title>{item.title || item.name || <Skeleton />}</Title>
         <SubHeader>
-          {<Genres url={genreList} item={item} /> || <Skeleton />}
+          {<Genres url={genreList} inputGenres={item.genre_ids} /> || (
+            <Skeleton />
+          )}
         </SubHeader>
         <Description>{item.overview || <Skeleton count={5} />}</Description>
       </TextWrapper>
@@ -33,9 +41,12 @@ const SlideWrapper = styled.div<{ background: string }>`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0%;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-const TextWrapper = styled.div`
+export const TextWrapper = styled.div`
   width: 40%;
   height: 100%;
   display: flex;
@@ -51,16 +62,16 @@ const TextWrapper = styled.div`
   );
 `;
 
-const Title = styled.div`
+export const Title = styled.div`
   font-size: 40px;
   margin: 20px 0px 0px;
 `;
-const Description = styled.div`
+export const Description = styled.div`
   font-size: 18px;
   padding: 20px 0px;
 `;
 
-const SubHeader = styled.div`
+export const SubHeader = styled.div`
   font-size: 16px;
   padding: 10px;
   color: #318000;

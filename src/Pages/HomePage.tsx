@@ -9,11 +9,26 @@ function HomePage() {
   return (
     <>
       <PageContent>
-        <Slides urls={movieUrls} title="Trending Movies" />
-        <CardRow url={movieUrls.topRated} title="Top Rated Movies" />
-        <CardRow url={movieUrls.upcoming || ""} title="Upcoming Movies" />
-        <Slides urls={tvUrls} title="Trending Tv" />
-        <CardRow url={tvUrls.popular} title="Popular Tv" />
+        <Slides urls={movieUrls} title="Trending Movies" mediatype="movie" />
+        <CardRow
+          url={movieUrls.topRated}
+          mediatype="movie"
+          title="Top Rated Movies"
+          isPerson={false}
+        />
+        <CardRow
+          url={movieUrls.upcoming || ""}
+          mediatype="movie"
+          title="Upcoming Movies"
+          isPerson={false}
+        />
+        <Slides urls={tvUrls} title="Trending Tv" mediatype="tv" />
+        <CardRow
+          url={tvUrls.popular}
+          mediatype="tv"
+          title="Popular Tv"
+          isPerson={false}
+        />
       </PageContent>
     </>
   );

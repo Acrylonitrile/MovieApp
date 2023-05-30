@@ -4,10 +4,10 @@ import { IMovieorTv } from "../Interfaces";
 
 interface Props {
   url: string;
-  item: IMovieorTv;
+  inputGenres: Array<number>;
 }
 
-function Genres({ url, item }: Props) {
+function DisplayGenres({ url, inputGenres }: Props) {
   const [genreList, setGenreList] = useState<Map<number, string>>(new Map([]));
   const [status, setStatus] = useState<boolean>(false);
 
@@ -27,7 +27,7 @@ function Genres({ url, item }: Props) {
     if (!status) getData();
   }, [status]);
 
-  return <>{item.genre_ids.map((id) => genreList.get(id) + "  ")}</>;
+  return <>{inputGenres.map((id) => genreList.get(id) + "  ")}</>;
 }
 
-export default Genres;
+export default DisplayGenres;

@@ -11,19 +11,24 @@ import Card from "../Atoms/Card";
 interface Props {
   title: string;
   url: string;
+  mediatype: "movie" | "tv";
+  isPerson: boolean;
 }
 
-function CardRow({ title, url }: Props) {
+function CardRow({ title, url, mediatype, isPerson }: Props) {
   const [moviesOrTv, setMoviesOrTv] = useState<Array<IMovieorTv>>();
+  const [status, setStatus] = useState<boolean>(false);
 
   const getData = async () => {
     let data = await FetchData(url);
-    setMoviesOrTv(data.results);
+    setMoviesOrTv(isPerson ? data.cast : data.results);
+    setStatus(true);
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (!status) getData();
+  }, [status]);
+  console.log(moviesOrTv);
 
   if (moviesOrTv) {
     // console.log(moviesOrTv);
@@ -45,6 +50,8 @@ function CardRow({ title, url }: Props) {
                 <Card
                   background={item.poster_path}
                   name={item.title || item.name || ""}
+                  mediatype={mediatype}
+                  id={item.id}
                 />
               </SwiperSlide>
             ))}

@@ -12,9 +12,10 @@ import SingleSlide from "../Atoms/SingleSlide";
 interface Props {
   urls: Urls;
   title: string;
+  mediatype: "movie" | "tv";
 }
 
-function Slides({ urls, title }: Props) {
+function Slides({ urls, title, mediatype }: Props) {
   const [moviesOrTv, setMoviesOrTv] = useState<Array<IMovieorTv>>([]);
   const [timePeriod, setTimePeriod] = useState<"day" | "week">("day");
   const [status, setStatus] = useState<boolean>(false);
@@ -39,6 +40,7 @@ function Slides({ urls, title }: Props) {
     }
   }, [status]);
 
+  console.log(moviesOrTv);
   return (
     <MainWrapper>
       <SwiperWrap>
@@ -55,7 +57,11 @@ function Slides({ urls, title }: Props) {
         >
           {moviesOrTv.map((item) => (
             <SwiperSlide>
-              <SingleSlide item={item} genreList={urls.genreList} />
+              <SingleSlide
+                item={item}
+                genreList={urls.genreList}
+                mediatype={mediatype}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
